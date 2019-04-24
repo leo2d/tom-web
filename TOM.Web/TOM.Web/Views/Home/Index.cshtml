@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TOM.Core.Entities.Voo>
+
+@{
+    ViewBag.Title = "Voos";
+}
+
+<h2>Voos</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Voo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DataVoo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Origem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aeronave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroVoo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorUnicoPassagem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantidadeAssentos)
+        </th>
+
+        <th>
+            Lugares Livres
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVoo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Origem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aeronave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroVoo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnicoPassagem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantidadeAssentos)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantidadeAssentosLivres)
+            </td>
+            @if (item.RetornarQuantidadeLugaresLivres() > 0)
+            {
+                <td>
+                    <a href="@Url.Action("ComprarBilhete",  new { idVoo = item.Id })" class="btn btn-info"><i class="glyphicon-edit"></i>Comprar Passagem</a>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+                    @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            }
+        </tr>
+    }
+
+</table>

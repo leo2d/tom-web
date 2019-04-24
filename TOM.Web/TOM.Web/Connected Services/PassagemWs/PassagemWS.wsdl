@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tom.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tom.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tom.org/">
+      <s:element name="ComprarBilhete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idVoo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ComprarBilheteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ComprarBilheteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DevolverBilhete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="numeroVoo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DevolverBilheteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DevolverBilheteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarTodas">
+        <s:complexType />
+      </s:element>
+      <s:element name="BuscarTodasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarTodasResult" type="tns:ArrayOfPassagem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPassagem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Passagem" nillable="true" type="tns:Passagem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Passagem">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseEntityOfPassagem">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ValorPassagem" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataVoo" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdVoo" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Voo" type="tns:Voo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseEntityOfPassagem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Voo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseEntityOfVoo">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DataVoo" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Origem" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Destino" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Aeronave" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumeroVoo" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="QuantidadeAssentos" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ValorUnicoPassagem" type="s:decimal" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseEntityOfVoo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BuscarPorVoo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idVoo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarPorVooResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarPorVooResult" type="tns:ArrayOfPassagem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ComprarBilheteSoapIn">
+    <wsdl:part name="parameters" element="tns:ComprarBilhete" />
+  </wsdl:message>
+  <wsdl:message name="ComprarBilheteSoapOut">
+    <wsdl:part name="parameters" element="tns:ComprarBilheteResponse" />
+  </wsdl:message>
+  <wsdl:message name="DevolverBilheteSoapIn">
+    <wsdl:part name="parameters" element="tns:DevolverBilhete" />
+  </wsdl:message>
+  <wsdl:message name="DevolverBilheteSoapOut">
+    <wsdl:part name="parameters" element="tns:DevolverBilheteResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarTodasSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarTodas" />
+  </wsdl:message>
+  <wsdl:message name="BuscarTodasSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarTodasResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarPorVooSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarPorVoo" />
+  </wsdl:message>
+  <wsdl:message name="BuscarPorVooSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarPorVooResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PassagemWSSoap">
+    <wsdl:operation name="ComprarBilhete">
+      <wsdl:input message="tns:ComprarBilheteSoapIn" />
+      <wsdl:output message="tns:ComprarBilheteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DevolverBilhete">
+      <wsdl:input message="tns:DevolverBilheteSoapIn" />
+      <wsdl:output message="tns:DevolverBilheteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarTodas">
+      <wsdl:input message="tns:BuscarTodasSoapIn" />
+      <wsdl:output message="tns:BuscarTodasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarPorVoo">
+      <wsdl:input message="tns:BuscarPorVooSoapIn" />
+      <wsdl:output message="tns:BuscarPorVooSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PassagemWSSoap" type="tns:PassagemWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ComprarBilhete">
+      <soap:operation soapAction="http://tom.org/ComprarBilhete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverBilhete">
+      <soap:operation soapAction="http://tom.org/DevolverBilhete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarTodas">
+      <soap:operation soapAction="http://tom.org/BuscarTodas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarPorVoo">
+      <soap:operation soapAction="http://tom.org/BuscarPorVoo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PassagemWSSoap12" type="tns:PassagemWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ComprarBilhete">
+      <soap12:operation soapAction="http://tom.org/ComprarBilhete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverBilhete">
+      <soap12:operation soapAction="http://tom.org/DevolverBilhete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarTodas">
+      <soap12:operation soapAction="http://tom.org/BuscarTodas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarPorVoo">
+      <soap12:operation soapAction="http://tom.org/BuscarPorVoo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PassagemWS">
+    <wsdl:port name="PassagemWSSoap" binding="tns:PassagemWSSoap">
+      <soap:address location="http://localhost:50736/PassagemWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PassagemWSSoap12" binding="tns:PassagemWSSoap12">
+      <soap12:address location="http://localhost:50736/PassagemWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
