@@ -188,7 +188,15 @@ namespace TOM.Web.Controllers
             if (String.IsNullOrEmpty(filtro.DataVoo) && string.IsNullOrEmpty(filtro.Origem) && string.IsNullOrEmpty(filtro.Destino))
                 return View("Index", voos);
 
+            var filtroFinal = new VooWs.FiltroBuscaVooDTO() { Origem = filtro.Origem, Destino = filtro.Destino, DataVoo = filtro.DataVoo };
+            var voosWs = _vooClient.BuscarVoosPorFiltro(filtroFinal);
 
+            foreach (var item in voosWs)
+            {
+                var voo = GerarVoo(item);
+
+                voos.Add(voo);
+            }
 
             return View("Index", voos);
         }

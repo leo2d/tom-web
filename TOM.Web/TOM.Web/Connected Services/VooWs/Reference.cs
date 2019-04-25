@@ -81,6 +81,8 @@ namespace TOM.Web.VooWs {
         
         private decimal ValorUnicoPassagemField;
         
+        private System.Nullable<int> QuantidadeAssentosLivresField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public System.DateTime DataVoo {
             get {
@@ -171,6 +173,96 @@ namespace TOM.Web.VooWs {
                 }
             }
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public System.Nullable<int> QuantidadeAssentosLivres {
+            get {
+                return this.QuantidadeAssentosLivresField;
+            }
+            set {
+                if ((this.QuantidadeAssentosLivresField.Equals(value) != true)) {
+                    this.QuantidadeAssentosLivresField = value;
+                    this.RaisePropertyChanged("QuantidadeAssentosLivres");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FiltroBuscaVooDTO", Namespace="http://tom.org/")]
+    [System.SerializableAttribute()]
+    public partial class FiltroBuscaVooDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DataVooField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrigemField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DestinoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string DataVoo {
+            get {
+                return this.DataVooField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataVooField, value) != true)) {
+                    this.DataVooField = value;
+                    this.RaisePropertyChanged("DataVoo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Origem {
+            get {
+                return this.OrigemField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrigemField, value) != true)) {
+                    this.OrigemField = value;
+                    this.RaisePropertyChanged("Origem");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Destino {
+            get {
+                return this.DestinoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DestinoField, value) != true)) {
+                    this.DestinoField = value;
+                    this.RaisePropertyChanged("Destino");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -203,6 +295,13 @@ namespace TOM.Web.VooWs {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/BuscarTodos", ReplyAction="*")]
         System.Threading.Tasks.Task<TOM.Web.VooWs.BuscarTodosResponse> BuscarTodosAsync(TOM.Web.VooWs.BuscarTodosRequest request);
+        
+        // CODEGEN: Generating message contract since element name filtro from namespace http://tom.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/BuscarVoosPorFiltro", ReplyAction="*")]
+        TOM.Web.VooWs.BuscarVoosPorFiltroResponse BuscarVoosPorFiltro(TOM.Web.VooWs.BuscarVoosPorFiltroRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/BuscarVoosPorFiltro", ReplyAction="*")]
+        System.Threading.Tasks.Task<TOM.Web.VooWs.BuscarVoosPorFiltroResponse> BuscarVoosPorFiltroAsync(TOM.Web.VooWs.BuscarVoosPorFiltroRequest request);
         
         // CODEGEN: Generating message contract since element name BuscarPorIdResult from namespace http://tom.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/BuscarPorId", ReplyAction="*")]
@@ -399,6 +498,74 @@ namespace TOM.Web.VooWs {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class BuscarVoosPorFiltroRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="BuscarVoosPorFiltro", Namespace="http://tom.org/", Order=0)]
+        public TOM.Web.VooWs.BuscarVoosPorFiltroRequestBody Body;
+        
+        public BuscarVoosPorFiltroRequest() {
+        }
+        
+        public BuscarVoosPorFiltroRequest(TOM.Web.VooWs.BuscarVoosPorFiltroRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tom.org/")]
+    public partial class BuscarVoosPorFiltroRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public TOM.Web.VooWs.FiltroBuscaVooDTO filtro;
+        
+        public BuscarVoosPorFiltroRequestBody() {
+        }
+        
+        public BuscarVoosPorFiltroRequestBody(TOM.Web.VooWs.FiltroBuscaVooDTO filtro) {
+            this.filtro = filtro;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class BuscarVoosPorFiltroResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="BuscarVoosPorFiltroResponse", Namespace="http://tom.org/", Order=0)]
+        public TOM.Web.VooWs.BuscarVoosPorFiltroResponseBody Body;
+        
+        public BuscarVoosPorFiltroResponse() {
+        }
+        
+        public BuscarVoosPorFiltroResponse(TOM.Web.VooWs.BuscarVoosPorFiltroResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tom.org/")]
+    public partial class BuscarVoosPorFiltroResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public TOM.Web.VooWs.Voo[] BuscarVoosPorFiltroResult;
+        
+        public BuscarVoosPorFiltroResponseBody() {
+        }
+        
+        public BuscarVoosPorFiltroResponseBody(TOM.Web.VooWs.Voo[] BuscarVoosPorFiltroResult) {
+            this.BuscarVoosPorFiltroResult = BuscarVoosPorFiltroResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class BuscarPorIdRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="BuscarPorId", Namespace="http://tom.org/", Order=0)]
@@ -567,6 +734,31 @@ namespace TOM.Web.VooWs {
             TOM.Web.VooWs.BuscarTodosRequest inValue = new TOM.Web.VooWs.BuscarTodosRequest();
             inValue.Body = new TOM.Web.VooWs.BuscarTodosRequestBody();
             return ((TOM.Web.VooWs.VooWSSoap)(this)).BuscarTodosAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TOM.Web.VooWs.BuscarVoosPorFiltroResponse TOM.Web.VooWs.VooWSSoap.BuscarVoosPorFiltro(TOM.Web.VooWs.BuscarVoosPorFiltroRequest request) {
+            return base.Channel.BuscarVoosPorFiltro(request);
+        }
+        
+        public TOM.Web.VooWs.Voo[] BuscarVoosPorFiltro(TOM.Web.VooWs.FiltroBuscaVooDTO filtro) {
+            TOM.Web.VooWs.BuscarVoosPorFiltroRequest inValue = new TOM.Web.VooWs.BuscarVoosPorFiltroRequest();
+            inValue.Body = new TOM.Web.VooWs.BuscarVoosPorFiltroRequestBody();
+            inValue.Body.filtro = filtro;
+            TOM.Web.VooWs.BuscarVoosPorFiltroResponse retVal = ((TOM.Web.VooWs.VooWSSoap)(this)).BuscarVoosPorFiltro(inValue);
+            return retVal.Body.BuscarVoosPorFiltroResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<TOM.Web.VooWs.BuscarVoosPorFiltroResponse> TOM.Web.VooWs.VooWSSoap.BuscarVoosPorFiltroAsync(TOM.Web.VooWs.BuscarVoosPorFiltroRequest request) {
+            return base.Channel.BuscarVoosPorFiltroAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<TOM.Web.VooWs.BuscarVoosPorFiltroResponse> BuscarVoosPorFiltroAsync(TOM.Web.VooWs.FiltroBuscaVooDTO filtro) {
+            TOM.Web.VooWs.BuscarVoosPorFiltroRequest inValue = new TOM.Web.VooWs.BuscarVoosPorFiltroRequest();
+            inValue.Body = new TOM.Web.VooWs.BuscarVoosPorFiltroRequestBody();
+            inValue.Body.filtro = filtro;
+            return ((TOM.Web.VooWs.VooWSSoap)(this)).BuscarVoosPorFiltroAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

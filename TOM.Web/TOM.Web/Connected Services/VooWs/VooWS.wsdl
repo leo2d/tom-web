@@ -20,6 +20,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="NumeroVoo" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="QuantidadeAssentos" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="ValorUnicoPassagem" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="QuantidadeAssentosLivres" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -67,6 +68,27 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Voo" nillable="true" type="tns:Voo" />
         </s:sequence>
       </s:complexType>
+      <s:element name="BuscarVoosPorFiltro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filtro" type="tns:FiltroBuscaVooDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FiltroBuscaVooDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DataVoo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Origem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destino" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BuscarVoosPorFiltroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarVoosPorFiltroResult" type="tns:ArrayOfVoo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="BuscarPorId">
         <s:complexType>
           <s:sequence>
@@ -107,6 +129,12 @@
   <wsdl:message name="BuscarTodosSoapOut">
     <wsdl:part name="parameters" element="tns:BuscarTodosResponse" />
   </wsdl:message>
+  <wsdl:message name="BuscarVoosPorFiltroSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarVoosPorFiltro" />
+  </wsdl:message>
+  <wsdl:message name="BuscarVoosPorFiltroSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarVoosPorFiltroResponse" />
+  </wsdl:message>
   <wsdl:message name="BuscarPorIdSoapIn">
     <wsdl:part name="parameters" element="tns:BuscarPorId" />
   </wsdl:message>
@@ -129,6 +157,10 @@
     <wsdl:operation name="BuscarTodos">
       <wsdl:input message="tns:BuscarTodosSoapIn" />
       <wsdl:output message="tns:BuscarTodosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarVoosPorFiltro">
+      <wsdl:input message="tns:BuscarVoosPorFiltroSoapIn" />
+      <wsdl:output message="tns:BuscarVoosPorFiltroSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="BuscarPorId">
       <wsdl:input message="tns:BuscarPorIdSoapIn" />
@@ -166,6 +198,15 @@
     </wsdl:operation>
     <wsdl:operation name="BuscarTodos">
       <soap:operation soapAction="http://tom.org/BuscarTodos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarVoosPorFiltro">
+      <soap:operation soapAction="http://tom.org/BuscarVoosPorFiltro" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -214,6 +255,15 @@
     </wsdl:operation>
     <wsdl:operation name="BuscarTodos">
       <soap12:operation soapAction="http://tom.org/BuscarTodos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarVoosPorFiltro">
+      <soap12:operation soapAction="http://tom.org/BuscarVoosPorFiltro" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

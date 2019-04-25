@@ -192,6 +192,9 @@
     <Content Include="Connected Services\VooWs\TOM.Web.VooWs.Voo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\VooWs\TOM.Web.VooWs.BuscarVoosPorFiltroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\VooWs\VooWS.wsdl" />
     <Content Include="Properties\DataSources\TOM.Core.TomPassagemService.Passagem.datasource" />
     <Content Include="Properties\DataSources\TOM.Core.TomPassagemService.Passagem1.datasource" />
