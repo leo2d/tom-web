@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using TOM.Core.DTOs;
 using TOM.Core.Entities;
 
 
@@ -144,7 +145,7 @@ namespace TOM.Web.Controllers
 
         private Voo GerarVoo(dynamic item)
         {
-           var voo =  new Voo()
+            var voo = new Voo()
             {
                 Id = item.Id,
                 Aeronave = item.Aeronave,
@@ -160,6 +161,36 @@ namespace TOM.Web.Controllers
             voo.QuantidadeAssentosLivres = voo.RetornarQuantidadeLugaresLivres();
 
             return voo;
+        }
+
+        [HttpGet]
+        public ActionResult CancelarPassagem(int numeroVoo)
+        {
+            _passegmClient.DevolverBilhete(numeroVoo);
+
+            return RedirectToAction("Passagens");
+        }
+
+        [HttpGet]
+        public ActionResult ComprarPassagens(int numeroVoo, int quantidadePassagens)
+        {
+            _passegmClient.ComprarBilhetes(numeroVoo, quantidadePassagens);
+
+            return RedirectToAction("Passagens");
+        }
+
+        [HttpGet]
+        //public ActionResult BuscarVoosPorFiltro(string dataVoo, string origem, string destino)
+        public ActionResult BuscarVoosPorFiltro(FiltroBuscaVooDTO filtro)
+        {
+            var voos = new List<Voo>();
+
+            if (String.IsNullOrEmpty(filtro.DataVoo) && string.IsNullOrEmpty(filtro.Origem) && string.IsNullOrEmpty(filtro.Destino))
+                return View("Index", voos);
+
+
+
+            return View("Index", voos);
         }
     }
 }

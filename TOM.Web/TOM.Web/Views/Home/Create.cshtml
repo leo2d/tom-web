@@ -1,22 +1,22 @@
 ﻿@model TOM.Core.Entities.Voo
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Cadastrar voo";
 }
 
-<h2>Create</h2>
+<h2>Cadastrar novo voo</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Voo</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.DataVoo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Data do voo</label>
+
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DataVoo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DataVoo, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Origem, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Origem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Origem, new { htmlAttributes = new { @class = "form-control required" } })
                 @Html.ValidationMessageFor(model => model.Origem, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Destino, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Destino, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Destino, new { htmlAttributes = new { @class = "form-control required" } })
                 @Html.ValidationMessageFor(model => model.Destino, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,13 +42,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Aeronave, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Aeronave, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Aeronave, new { htmlAttributes = new { @class = "form-control required" } })
                 @Html.ValidationMessageFor(model => model.Aeronave, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NumeroVoo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Numero do voo</label>
+
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NumeroVoo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NumeroVoo, "", new { @class = "text-danger" })
@@ -56,7 +57,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.QuantidadeAssentos, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Quantidade de assentos</label>
+
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QuantidadeAssentos, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.QuantidadeAssentos, "", new { @class = "text-danger" })
@@ -64,7 +66,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ValorUnicoPassagem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Preço da passagem</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ValorUnicoPassagem, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ValorUnicoPassagem, "", new { @class = "text-danger" })
@@ -72,23 +74,25 @@
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.QuantidadeAssentosLivres, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.QuantidadeAssentosLivres, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.QuantidadeAssentosLivres, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.QuantidadeAssentosLivres, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.QuantidadeAssentosLivres, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.QuantidadeAssentosLivres, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <p>
+        <a href=" @Url.Action("Index", "Home")" class="btn btn-warning">Voltar</a>
+    </p>
 </div>
 
 @section Scripts {

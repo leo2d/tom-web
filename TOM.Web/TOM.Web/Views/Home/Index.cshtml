@@ -4,86 +4,111 @@
     ViewBag.Title = "Voos";
 }
 
-<h2>Voos</h2>
-
+<br />
 <p>
-    @Html.ActionLink("Cadastrar Voo", "Create")
+    <a href=" @Url.Action("Create", "Home")" class="btn btn-primary">Cadastrar Voo</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Data do Voo
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Origem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Destino)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Aeronave)
-        </th>
-        <th>
-            Numero do Voo
-        </th>
-        <th>
-            Preço Passagem
-        </th>
-        <th>
-            Total Assentos
-        </th>
 
-        <th>
-            Assentos Livres
-        </th>
-        <th></th>
-    </tr>
+<h2>Voos</h2>
+<div class="form-group form-inline">
+    <form action="Home/BuscarVoosPorFiltro" method="get">
+        <div class="form-group form-inline">
+            <input type="text" name="DataVoo" value="" placeholder="Data Voo" class="form-control" />
+            <input type="text" name="Origem" value="" placeholder="Origem" class="form-control" />
+            <input type="text" name="Destino" value="" placeholder="Destino" class="form-control" />
+            <button type="submit" class="btn btn-success ">Buscar Voos</button>
+        </div>
+    </form>
+</div>
 
-    @foreach (var item in Model)
+@{if (!Model.Any())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataVoo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Origem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Destino)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aeronave)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroVoo)
-            </td>
-            <td>
-                @{
-                    var preco = item.ValorUnicoPassagem.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
-                }
+        <div class="text-center text-danger">
+            <h2 class="text-danger">Nenhum voo encontrado</h2>
+        </div>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Data do Voo
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Origem)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Destino)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Aeronave)
+                </th>
+                <th>
+                    Numero do Voo
+                </th>
+                <th>
+                    Preço Passagem
+                </th>
+                <th>
+                    Total Assentos
+                </th>
 
-                @preco
+                <th>
+                    Assentos Livres
+                </th>
+                <th></th>
+            </tr>
 
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantidadeAssentos)
-            </td>
-
-
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantidadeAssentosLivres)
-            </td>
-            @if (item.RetornarQuantidadeLugaresLivres() > 0)
+            @foreach (var item in Model)
             {
-                <td>
-                    <a href="@Url.Action("ComprarBilhete",  new { idVoo = item.Id })" class="btn btn-info"><i class="glyphicon-bitcoin"></i> Comprar Passagem</a>
-                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
-                    @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-                    @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVoo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Origem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Aeronave)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroVoo)
+                    </td>
+                    <td>
+                        @{
+                            var preco = item.ValorUnicoPassagem.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+                        }
+
+                        @preco
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantidadeAssentos)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantidadeAssentosLivres)
+                    </td>
+                    @if (item.RetornarQuantidadeLugaresLivres() > 0)
+                    {
+                        <td>
+                            <a href="@Url.Action("ComprarBilhete",  new { idVoo = item.Id })" class="btn btn-warning"><i class="glyphicon-bitcoin"></i> Comprar Passagem</a>
+                            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+                            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                            @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                        </td>
+                    }
+                </tr>
             }
-        </tr>
+
+        </table>
+
     }
 
-</table>
+}
+

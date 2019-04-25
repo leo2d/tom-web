@@ -4,6 +4,34 @@
     ViewBag.Title = "Passagens";
 }
 
+
+<div>
+    <br />
+    <br />
+    <br />
+    <h4>Cancelar Passagem</h4>
+    <div class="form-group">
+        <form action="CancelarPassagem" method="get">
+            <div class="form-inline">
+                <input type="number" name="numeroVoo" value="" placeholder="Numero Voo" class="form-control" required />
+                <button type="submit" class="btn btn-danger ">Cancelar Passagem</button>
+            </div>
+        </form>
+    </div>
+    <h4>Comprar Passagens</h4>
+    <div class="form-group form-inline">
+        <form action="ComprarPassagens" method="get">
+            <div class="form-group form-inline">
+                <input type="number" name="numeroVoo" value="" placeholder="Numero Voo" class="form-control" required />
+                <input type="number" name="quantidadePassagens" value="" placeholder="Quantidade" class="form-control" required />
+                <button type="submit" class="btn btn-success ">Comprar Passagem</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<hr />
+
 <h2>Passagens</h2>
 
 <table class="table">

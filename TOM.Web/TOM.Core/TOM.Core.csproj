@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\FiltroBuscaVooDTO.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Passagem.cs" />
     <Compile Include="Entities\Voo.cs" />

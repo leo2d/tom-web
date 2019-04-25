@@ -16,6 +16,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ComprarBilhetes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="numeroVoo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="quantidade" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ComprarBilhetesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ComprarBilhetesResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="DevolverBilhete">
         <s:complexType>
           <s:sequence>
@@ -73,6 +88,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="NumeroVoo" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="QuantidadeAssentos" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="ValorUnicoPassagem" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="QuantidadeAssentosLivres" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -104,6 +120,12 @@
   <wsdl:message name="ComprarBilheteSoapOut">
     <wsdl:part name="parameters" element="tns:ComprarBilheteResponse" />
   </wsdl:message>
+  <wsdl:message name="ComprarBilhetesSoapIn">
+    <wsdl:part name="parameters" element="tns:ComprarBilhetes" />
+  </wsdl:message>
+  <wsdl:message name="ComprarBilhetesSoapOut">
+    <wsdl:part name="parameters" element="tns:ComprarBilhetesResponse" />
+  </wsdl:message>
   <wsdl:message name="DevolverBilheteSoapIn">
     <wsdl:part name="parameters" element="tns:DevolverBilhete" />
   </wsdl:message>
@@ -127,6 +149,10 @@
       <wsdl:input message="tns:ComprarBilheteSoapIn" />
       <wsdl:output message="tns:ComprarBilheteSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ComprarBilhetes">
+      <wsdl:input message="tns:ComprarBilhetesSoapIn" />
+      <wsdl:output message="tns:ComprarBilhetesSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="DevolverBilhete">
       <wsdl:input message="tns:DevolverBilheteSoapIn" />
       <wsdl:output message="tns:DevolverBilheteSoapOut" />
@@ -144,6 +170,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ComprarBilhete">
       <soap:operation soapAction="http://tom.org/ComprarBilhete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComprarBilhetes">
+      <soap:operation soapAction="http://tom.org/ComprarBilhetes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -183,6 +218,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ComprarBilhete">
       <soap12:operation soapAction="http://tom.org/ComprarBilhete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComprarBilhetes">
+      <soap12:operation soapAction="http://tom.org/ComprarBilhetes" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

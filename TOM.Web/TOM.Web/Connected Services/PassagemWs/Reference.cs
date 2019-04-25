@@ -149,6 +149,8 @@ namespace TOM.Web.PassagemWs {
         
         private decimal ValorUnicoPassagemField;
         
+        private System.Nullable<int> QuantidadeAssentosLivresField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public System.DateTime DataVoo {
             get {
@@ -239,6 +241,19 @@ namespace TOM.Web.PassagemWs {
                 }
             }
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public System.Nullable<int> QuantidadeAssentosLivres {
+            get {
+                return this.QuantidadeAssentosLivresField;
+            }
+            set {
+                if ((this.QuantidadeAssentosLivresField.Equals(value) != true)) {
+                    this.QuantidadeAssentosLivresField = value;
+                    this.RaisePropertyChanged("QuantidadeAssentosLivres");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -295,6 +310,12 @@ namespace TOM.Web.PassagemWs {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/ComprarBilhete", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> ComprarBilheteAsync(int idVoo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/ComprarBilhetes", ReplyAction="*")]
+        bool ComprarBilhetes(int numeroVoo, int quantidade);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/ComprarBilhetes", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> ComprarBilhetesAsync(int numeroVoo, int quantidade);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tom.org/DevolverBilhete", ReplyAction="*")]
         bool DevolverBilhete(int numeroVoo);
@@ -479,6 +500,14 @@ namespace TOM.Web.PassagemWs {
         
         public System.Threading.Tasks.Task<bool> ComprarBilheteAsync(int idVoo) {
             return base.Channel.ComprarBilheteAsync(idVoo);
+        }
+        
+        public bool ComprarBilhetes(int numeroVoo, int quantidade) {
+            return base.Channel.ComprarBilhetes(numeroVoo, quantidade);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ComprarBilhetesAsync(int numeroVoo, int quantidade) {
+            return base.Channel.ComprarBilhetesAsync(numeroVoo, quantidade);
         }
         
         public bool DevolverBilhete(int numeroVoo) {
