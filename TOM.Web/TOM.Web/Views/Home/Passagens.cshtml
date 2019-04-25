@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TOM.Core.Entities.Passagem>
+
+@{
+    ViewBag.Title = "Passagens";
+}
+
+<h2>Passagens</h2>
+
+<table class="table">
+    <tr>
+        <td>
+            Numero Voo
+        </td>
+        <td>
+            Numero Passagem
+        </td>
+        <th>
+            Preço Passagem
+        </th>
+        <th>
+            Data do Voo
+        </th>
+
+        <td>
+            Origem
+        </td>
+        <td>
+            Destino
+        </td>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voo.NumeroVoo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @{
+                    var preco = item.ValorPassagem.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+                }
+
+                @preco
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVoo)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Voo.Origem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voo.Destino)
+            </td>
+
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
+        </tr>
+    }
+
+</table>

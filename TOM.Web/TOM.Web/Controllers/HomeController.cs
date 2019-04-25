@@ -29,20 +29,8 @@ namespace TOM.Web.Controllers
                 List<Voo> voos = new List<Voo>();
                 foreach (var item in result)
                 {
-                    var voo = new Voo()
-                    {
-                        Id = item.Id,
-                        Aeronave = item.Aeronave,
-                        DataVoo = item.DataVoo,
-                        NumeroVoo = item.NumeroVoo,
-                        Origem = item.Origem,
-                        Destino = item.Destino,
-                        Passagens = GetPassagens(item.Id),
-                        ValorUnicoPassagem = item.ValorUnicoPassagem,
-                        QuantidadeAssentos = item.QuantidadeAssentos
-                    };
+                    var voo = GerarVoo(item);
 
-                    voo.QuantidadeAssentosLivres = voo.RetornarQuantidadeLugaresLivres();
 
                     voos.Add(voo);
                 }
@@ -51,6 +39,14 @@ namespace TOM.Web.Controllers
             }
 
             //return View(result);
+        }
+
+        [HttpGet]
+        public ActionResult Passagens()
+        {
+            var passagens = GetPassagens();
+
+            return View(passagens);
         }
 
         private IList<Passagem> GetPassagens(int id)
@@ -67,6 +63,28 @@ namespace TOM.Web.Controllers
                         Id = passagem.Id,
                         DataVoo = passagem.DataVoo,
                         ValorPassagem = passagem.ValorPassagem,
+                    }
+                );
+            }
+
+            return passagens;
+        }
+
+        private IList<Passagem> GetPassagens()
+        {
+            var passagensWs = _passegmClient.BuscarTodas();
+
+            var passagens = new List<Passagem>();
+
+            foreach (var passagem in passagensWs)
+            {
+                passagens.Add(
+                    new Passagem()
+                    {
+                        Id = passagem.Id,
+                        DataVoo = passagem.DataVoo,
+                        ValorPassagem = passagem.ValorPassagem,
+                        Voo = GerarVoo(passagem.Voo)
                     }
                 );
             }
@@ -121,6 +139,27 @@ namespace TOM.Web.Controllers
                 );
 
             return RedirectToAction("Index");
+        }
+
+
+        private Voo GerarVoo(dynamic item)
+        {
+           var voo =  new Voo()
+            {
+                Id = item.Id,
+                Aeronave = item.Aeronave,
+                DataVoo = item.DataVoo,
+                NumeroVoo = item.NumeroVoo,
+                Origem = item.Origem.ToUpper(),
+                Destino = item.Destino.ToUpper(),
+                Passagens = GetPassagens(item.Id),
+                ValorUnicoPassagem = item.ValorUnicoPassagem,
+                QuantidadeAssentos = item.QuantidadeAssentos
+            };
+
+            voo.QuantidadeAssentosLivres = voo.RetornarQuantidadeLugaresLivres();
+
+            return voo;
         }
     }
 }

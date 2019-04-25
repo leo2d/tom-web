@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DataVoo)
+            Data do Voo
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Origem)
@@ -24,17 +24,17 @@
             @Html.DisplayNameFor(model => model.Aeronave)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NumeroVoo)
+            Numero do Voo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ValorUnicoPassagem)
+            Preço Passagem
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuantidadeAssentos)
+            Total Assentos
         </th>
 
         <th>
-            Lugares Livres
+            Assentos Livres
         </th>
         <th></th>
     </tr>
@@ -58,11 +58,18 @@
                 @Html.DisplayFor(modelItem => item.NumeroVoo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValorUnicoPassagem)
+                @{
+                    var preco = item.ValorUnicoPassagem.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"));
+                }
+
+                @preco
+
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.QuantidadeAssentos)
             </td>
+
 
             <td>
                 @Html.DisplayFor(modelItem => item.QuantidadeAssentosLivres)
@@ -70,7 +77,7 @@
             @if (item.RetornarQuantidadeLugaresLivres() > 0)
             {
                 <td>
-                    <a href="@Url.Action("ComprarBilhete",  new { idVoo = item.Id })" class="btn btn-info"><i class="glyphicon-edit"></i>Comprar Passagem</a>
+                    <a href="@Url.Action("ComprarBilhete",  new { idVoo = item.Id })" class="btn btn-info"><i class="glyphicon-bitcoin"></i> Comprar Passagem</a>
                     @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
                     @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
                     @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
